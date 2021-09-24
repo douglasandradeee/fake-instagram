@@ -27,7 +27,7 @@ module.exports = (conection, DataTypes) => {
         },
         {
             tableName: "users",
-            timestamp: false,
+            timestamps: false,
         }
     );
     return User

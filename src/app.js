@@ -16,4 +16,4 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", routes);
 
-app.listen(4000, () => console.log(`🚀 Server run on port 4000`));
+app.listen(3000, () => console.log(`🚀 Server run on port 3000`));
