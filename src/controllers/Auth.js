@@ -1,4 +1,5 @@
 const {User} = require("../models")
+const bcrypt = require("bcryptjs")
 const authController = {
   showLogin(req, res) {
     return res.render("auth/login");
@@ -12,7 +13,7 @@ const authController = {
       const user = await User.create({
         name,
         email,
-        password,
+        password: bcrypt.hashSync(password, 10),
         username,
         avatar:"link",
         create_at: new Date().toISOString(),
@@ -35,7 +36,7 @@ const authController = {
         return res.render("auth/login", {error: "Usuário não existe!"}) 
       }
     
-      if(user.password != password) {
+      if(!bcrypt.compareSync(password,user.password)) {
         return res.render("auth/login", {error: "A senha está errada!"}) 
       }
       return res.redirect("/home");
